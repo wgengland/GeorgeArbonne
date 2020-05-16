@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width = device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>George's Arbonne</title>
+  </head>
+  {%load static%}
+
+  <link rel="stylesheet" type="text/css" href="{%static 'Arbonne/style.css'%}">
+
+  <body>
+    <header>
+      <nav>
+        <div class="container nav-wrapper">
+          <a href="{% url 'Arbonne:my_favorites' profile_id %}" class="brand-logo">Welcome</a>
+          <ul id="nav-mobile" class="right small">
+            <li><img style="height:50px;margin: 3px 10px;" src="{% static 'Arbonne/images/LogoSmall.png'%}" ></li>
+          </ul>
+            <ul id="nav-mobile" class="right hide-on-small-and-down">
+            </ul>
+            <ul id="nav-mobile" class="left small hide-on-large-only">
+              <li><img style="height:50px;margin: 3px 10px;" src="{% static 'Arbonne/images/LogoSmall.png'%}" ></li>
+            </ul>
+        </div>
+      </nav>
+    </header>
+
+
+    <ul id="slide-out" class="sidenav">
+      <li><a href="{% url 'Arbonne:my_favorites' profile_id %}"><i class="material-icons">cloud</i>My Favorites</a></li>
+      <li class="divider" tabindex="-1"></li>
+      <li><a href="{% url 'Arbonne:skincare' profile_id %}"><i class="material-icons left">cloud</i>Skincare</a></li>
+      <li class="divider" tabindex="-1"></li>
+      <li><a href="{% url 'Arbonne:bath_and_body' profile_id %}"><i class="material-icons">cloud</i>Bath and Body</a></li>
+      <li class="divider" tabindex="-1"></li>
+      <li><a href="{% url 'Arbonne:makeup' profile_id %}"><i class="material-icons">cloud</i>Makeup</a></li>
+      <li class="divider" tabindex="-1"></li>
+      <li><a href="{% url 'Arbonne:nutrition' profile_id %}"><i class="material-icons">cloud</i>Nutrition</a></li>
+      <li class="divider" tabindex="-1"></li>
+      <li><a href="{% url 'Arbonne:hair' profile_id %}"><i class="material-icons">cloud</i>Hair</a></li>
+      <li class="divider" tabindex="-1"></li>
+    </ul>
+    <div class="trigger-div hide-on-small-and-down">
+      <div style="display: flex;justify-content: center;">
+        <a href="#" data-target="slide-out" class="btn sidenav-trigger" style="color:white;"><i id="icon-nav-menu" class="material-icons left">menu</i>{{title_of_page}}<i class="material-icons right"id="icon-nav-menu">menu</i></a>
+      </div>
+    </div>
+    <div class="trigger-div hide-on-med-and-up">
+      <div style="display: flex;justify-content: center;">
+        <a href="#" data-target="slide-out" class="btn sidenav-trigger trigger-small" style="color:white;"><i id="icon-nav-menu-small" class="material-icons left">menu</i>{{title_of_page}}<i class="material-icons right"id="icon-nav-menu-small">menu</i></a>
+      </div>
+    </div>
+<h9>
+<hr>
+</h9>
+    <main>
+      <div class="container">
+
+        <div style="flex-wrap: wrap;display: inline-flex;" class="row">
+
+          {% for post in final_postings%}
+
+            <div class="col s6 m4 l3">
+              <div class="card">
+                <div class="card-image">
+                  <img href={{post.3}} src={{post.4}}>
+                </div>
+                <div class="card-action hide-on-small-and-down">
+                  <span class="card-title activator blue-text text-ligthen-2"><i class="material-icons right">expand_less</i></span>
+                  <a href={{post.3}} target="_blank" style="font-size:1.5vw; color:#ee6e73;">{{post.0}}</a>
+                </div>
+                <div class="card-action hide-on-med-and-up">
+                  <span class="card-title activator blue-text text-ligthen-2"><i class="material-icons right">expand_less</i></span>
+                  <div><a href={{post.3}} target="_blank" style="font-size:3vw; font-weight:700;color: #ee6e73;">{{post.0}}</a></div>
+                </div>
+                <div id="reveal"class="card-reveal">
+                   <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></span>
+                   <p class="card-title">{{post.2}}</p>
+                 </div>
+              </div>
+            </div>
+          {%endfor%}
+        </div>
+        <br>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col s12 16">
+            <h5 class="white-text">Contact Us</h5>
+            <p class="grey-text text-lighten-4">For all your food and clothing needs.<br>
+             Call us on: (+44) 07795 436 429
+            </p>
+          </div>
+            <a class="waves-effect waves-light btn white-text cyan" href="https://www.instagram.com/mewefashionuk/">
+            <i class="medium material-icons right"style="font-size:40px">cloud</i>Instagram</a>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="container">
+        © 2014 Copyright Text
+        <a class="grey-text text-lighten-4 right" href="{% url 'accountprofile' %}">Member Site</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('.dropdown-trigger').dropdown();
+  });
+  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+    $('.sidenav').sidenav();
+  });
+  </script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('.dropdown-trigger').dropdown();
+  });
+  </script>
+</html>

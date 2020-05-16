@@ -1,0 +1,65 @@
+{%extends "users/base.html"%}
+{% load static %}
+
+{%block content%}
+<script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.min.js"></script>
+
+
+
+
+<div id="myChart">
+
+</div>
+
+<script>
+  var state ={
+    'items':[],
+    'values':[],
+  }
+  var dataURL = `/users/analyticsdata/`
+  $.ajax({
+    method:'GET',
+    url:dataURL,
+    success:function(response){
+      console.log('RESPONSE:',response)
+      for (var i in response){
+        var key = Object.keys(response[i])[0]
+        var value = Object.values(response[i])[0]
+
+        state.items.push(key)
+        state.values.push(value)
+      }
+      buildChart()
+    }
+  })
+  function buildChart(){
+    var chartData = {
+      "type":"line",
+      plot: {
+        aspect: "spline"
+      },
+      "scale-x":{
+        "values":state.items,
+      },
+      "scale-y":{
+        "decimals":0,
+        label: {
+          text: "Hits",
+        },
+      },
+      "series":[
+        {
+          "values":state.values
+        }
+      ]
+    }
+    zingchart.render({
+      id:"myChart",
+      data:chartData,
+    });
+  }
+
+</script>
+
+{%endblock content%}

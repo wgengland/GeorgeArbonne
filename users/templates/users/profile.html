@@ -1,0 +1,127 @@
+{% extends "users/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+
+    <div class="content-section" style="background-color: #FFFFF0;">
+      <div class="media">
+        <div class="media-body">
+          <h2 class="account-heading">Hello {{ user.username }}!</h2>
+
+          <p class="text-secondary">{{ user.email }}
+            <br>
+          My Site: <a href="{{user_home_url}}">{{user_home_url}}</a>
+            <br>
+          {%if hits is not None%}
+          Number of site hits: {{hits}}
+          {% endif%}
+          <hr>
+          <div id="add-product-btn">
+            <a class ="btn btn-primary btn-sm" href="{%url 'users:create_product'%}" role="button">Add a Product</a></p>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+      <!-- FORM HERE -->
+    </div>
+
+    <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.min.js"></script>
+
+
+{%if renderhits%}
+
+    <div id="myChart" style="border-radius: 10px;
+      box-shadow: 0 0 5px rgb(38, 166, 154); background:#26a69a">
+
+    </div>
+    <br>
+    <script>
+      var state ={
+        'items':[],
+        'values':[],
+      }
+      var dataURL = `/users/analyticsdata/`
+      $.ajax({
+        method:'GET',
+        url:dataURL,
+        success:function(response){
+          console.log('RESPONSE:',response)
+          for (var i in response){
+            var key = Object.keys(response[i])[0]
+            var value = Object.values(response[i])[0]
+
+            state.items.push(key)
+            state.values.push(value)
+          }
+          buildChart()
+        }
+      })
+      function buildChart(){
+        var chartData = {
+          "type":"line",
+          backgroundColor: '#FFFFF0',
+          plot: {
+            aspect: "spline",
+            animation: {
+              effect: "4",
+              method: "0",
+              sequence: "ANIMATION_BY_NODE",
+              speed: "200"
+          },
+          },
+          "scale-x":{
+            "values":state.items,
+          },
+          "scale-y":{
+            "decimals":0,
+            label: {
+              text: "Hits",
+            },
+          },
+          "series":[
+            {
+              "values":state.values,
+              "line-width":5,
+              "line-color":"#26a69a",
+              marker: { /* Marker object */
+                'background-color': "#FF0066", /* hexadecimal or RGB value */
+                size:4, /* in pixels */
+                'border-width':1 /* in pixels */
+              }
+            }
+          ]
+        }
+        zingchart.render({
+          id:"myChart",
+          data:chartData,
+          height:300,
+        });
+      }
+
+    </script>
+{%endif%}
+<div class="content-section" style="background-color: #FFFFF0;">
+  <div class="card-deck" >
+  {%for post in postings_by_user%}
+
+    <div class="card">
+      <img class="card-img-top" src={{post.image_url}} alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">{{post.product_name}}</h5>
+      </div>
+      <div class="card-footer">
+        <a href="{% url 'users:update_product' post.pk%}"><small class="text-muted">Update Product</small></a>
+      </div>
+    </div>
+  {%endfor%}
+  </div>
+</div>
+
+{% endblock content %}

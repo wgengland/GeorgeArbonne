@@ -9,10 +9,10 @@ dj-database-url==0.5.0
 Django==3.0.3
 django-crispy-forms==1.8.1
 django-heroku==0.3.1
+gunicorn==20.0.4
 idna==2.9
 Jinja2==2.11.2
 MarkupSafe==1.1.1
-mkl-fft==1.0.15
 mkl-random==1.1.0
 mkl-service==2.3.0
 numpy==1.18.1

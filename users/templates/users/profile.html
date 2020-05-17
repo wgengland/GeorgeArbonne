@@ -7,11 +7,8 @@
     <div class="content-section" style="background-color: #FFFFF0;">
       <div class="media">
         <div class="media-body">
-          <h2 class="account-heading">Hello {{ user.username }}!</h2>
-
-          <p class="text-secondary">{{ user.email }}
-            <br>
-          My Site: <a href="{{user_home_url}}">{{user_home_url}}</a>
+          <h2 class="account-heading">{{ user.username }}</h2>
+          My Link: <a href="{{user_home_url}}">{{user_home_url}}</a>
             <br>
           {%if hits is not None%}
           Number of site hits: {{hits}}

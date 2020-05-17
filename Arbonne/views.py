@@ -3,6 +3,7 @@ from django.views import generic
 from django.utils import timezone
 from datetime import timedelta
 from .models import Product, Analytics,Hit
+from users.models import ContactInfo
 from django.contrib.auth.models import User
 from bs4 import BeautifulSoup
 import requests
@@ -27,6 +28,8 @@ def my_favorites(request,profile_id):
 
     listings = Product.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:4]
     listings = Product.objects.filter(author_id = profile_id)
+    contactinfo = ContactInfo.objects.get(user = profile_id)
+
 
     final_postings = []
     for product in listings[:len(listings)]:
@@ -44,8 +47,13 @@ def my_favorites(request,profile_id):
         'final_postings':final_postings,
         'title_of_page':title_of_page,
         'profile_id':profile_id,
-
     }
+    if contactinfo.email != '':
+        stuff_for_frontend['email']=contactinfo.email
+    if contactinfo.phonenumber != '':
+        stuff_for_frontend['phonenumber']=contactinfo.phonenumber
+    if contactinfo.instagram_url != '':
+        stuff_for_frontend['instagram_url']=contactinfo.instagram_url
     return render(request,'Arbonne/home.html',stuff_for_frontend)
 def skincare(request,profile_id):
     username = User.objects.get(id=profile_id).username

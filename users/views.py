@@ -4,6 +4,7 @@ from Arbonne.models import Product
 from django.shortcuts import redirect
 from django.views.generic import CreateView,UpdateView
 from Arbonne.models import Product,Analytics,Hit
+from .models import ContactInfo
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
 from django.utils import timezone

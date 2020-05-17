@@ -19,7 +19,7 @@ def profile(request):
         products = Product.objects.all()
         for product in products[0:1]:
             product.delete()
-    user_home_url = "/"+str(request.user.id)
+    user_home_url = "https://geobonne.herokuapp.com/"+str(request.user.id)
     postings_by_user = Product.objects.filter(author_id = request.user.id)
     stuff_for_frontend = {
         'user_home_url':user_home_url,

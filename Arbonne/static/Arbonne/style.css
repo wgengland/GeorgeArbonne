@@ -129,3 +129,9 @@ flex-flow: wrap;
   font-size: 25px;
     padding-top: 2px;
 }
+.bottomtext{
+  display: flex;
+}
+.bottomtext a{
+  align-self: flex-end;
+}

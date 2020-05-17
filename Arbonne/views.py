@@ -43,7 +43,7 @@ def my_favorites(request,profile_id):
     for product in listings[:len(listings)]:
         title = product.product_name
         try:
-            price = product.product_price
+            price = "£"+str(product.product_price)+"0"
         except:
             price = 'Out of Stock'
         description = product.product_description

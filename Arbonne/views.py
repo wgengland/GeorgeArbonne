@@ -18,17 +18,6 @@ class IndexView(generic.ListView):
         return Product.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:4]
 
 def my_favorites(request,profile_id):
-    #Hello testing
-    '''products = Product.objects.filter(author_id = profile_id)
-    print(products)
-    if Analytics.objects.filter(user_id = profile_id):
-        home_hits_object = Analytics.objects.get(user_id = profile_id)
-        home_hits_object.hits = home_hits_object.hits + 1
-        if timezone.now() - home_hits_object.last_hit > timedelta(seconds=1):
-            home_hits_object.last_hit=timezone.now()
-            home_hits_object.save()
-            new_hit = Hit(user = home_hits_object.user)
-            new_hit.save()'''
     if Hit.objects.filter(user = profile_id):
         print("user found")
         mostrecenthit = Hit.objects.filter(user = profile_id).order_by('-dateOfHit')[0]

@@ -30,8 +30,6 @@ class Product(models.Model):
         self.product_price = product_info.select_one('[id="ctl00_MainContent_ProductInfo1_ctl00_HiddenPriceModule1_hidPCPrice"]')['value']
         self.product_url = self.product_url
         self.image_url = 'https://www.arbonne.com'+ product_info.find("img")['data-original']
-        if(len(Product.objects.all())>4):
-            Product.objects.first().delete()
         return super(Product, self).save(*args, **kwargs)
 
 

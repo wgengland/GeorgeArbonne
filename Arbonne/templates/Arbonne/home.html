@@ -103,17 +103,19 @@
       <div class="container">
         <div class="row">
           <div class="col s12 16">
-            <h5 class="white-text">Contact Me</h5>
-            <p class="grey-text text-lighten-4">I am an Arbonne independent consultant. <br>
-            {%if email%}
-            Email: {{email}}
-            <br>
+            {%if email or phonenumber%}
+              <h5 class="white-text">Contact Me</h5>
+              <p class="grey-text text-lighten-4">I am an Arbonne independent consultant. <br>
+              {%if email%}
+              Email: {{email}}
+              <br>
+              {%endif%}
+              {%if phonenumber%}
+              Phone: {{phonenumber}}
+              <br>
+              {%endif%}
+              </p>
             {%endif%}
-            {%if phonenumber%}
-            Phone: {{phonenumber}}
-            <br>
-            {%endif%}
-            </p>
           </div>
           {%if instagram_url%}
           <a class="waves-effect waves-light btn white-text cyan" href="{{instagram_url}}">

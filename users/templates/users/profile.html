@@ -14,8 +14,12 @@
           Number of site hits: {{hits}}
           {% endif%}
           <hr>
-          <div id="add-product-btn">
-            <a class ="btn btn-primary btn-sm" href="{%url 'users:create_product'%}" role="button">Add a Product</a></p>
+          <div id="add-product-btn" style="margin-top: 0px;
+          display: flex;
+          justify-content: space-evenly;">
+            <a style="margin:3px;flex: 1 1 0px;"class ="btn btn-primary btn-sm" href="{%url 'users:create_product'%}" role="button">Add a Product</a></p>
+            <a style="margin:3px;flex:1 1 0px;"class ="btn btn-primary btn-sm" href="{%url 'users:update_contact_info' contactinfopk%}" role="button">Update Contact Info</a></p>
+
           </div>
         </div>
       </div>
@@ -35,7 +39,7 @@
 {%if renderhits%}
 
     <div id="myChart" style="border-radius: 10px;
-      box-shadow: 0 0 5px rgb(38, 166, 154); background:#26a69a">
+      box-shadow: 0 0 5px rgb(38, 166, 154); ">
 
     </div>
     <br>
@@ -63,6 +67,11 @@
       function buildChart(){
         var chartData = {
           "type":"line",
+          "title":{
+            "text":"Page Views",
+            color: "#26a69a",
+
+          },
           backgroundColor: '#FFFFF0',
           plot: {
             aspect: "spline",
@@ -78,9 +87,6 @@
           },
           "scale-y":{
             "decimals":0,
-            label: {
-              text: "Page Views",
-            },
           },
           "series":[
             {
@@ -105,6 +111,8 @@
     </script>
 {%endif%}
 <div class="content-section" style="background-color: #FFFFF0;">
+  <h3 style="teac-align:center;">My Landing Page Products</h3>
+  <hr>
   <div class="card-deck" >
   {%for post in postings_by_user%}
 

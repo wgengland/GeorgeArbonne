@@ -121,6 +121,8 @@ min-width: 40%;
 }
 #add-product-btn{
   margin-top: 0px;
+  display: flex;
+  justify-content: space-evenly;
 }
 p {
   margin-bottom: .5rem

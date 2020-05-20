@@ -28,7 +28,7 @@ def my_favorites(request,profile_id):
 
     listings = Product.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:4]
     listings = Product.objects.filter(author_id = profile_id)
-    contactinfo = ContactInfo.objects.get(user = profile_id)
+    contactinfo = {}
 
 
     final_postings = []
@@ -48,12 +48,14 @@ def my_favorites(request,profile_id):
         'title_of_page':title_of_page,
         'profile_id':profile_id,
     }
-    if contactinfo.email != '':
-        stuff_for_frontend['email']=contactinfo.email
-    if contactinfo.phonenumber != '':
-        stuff_for_frontend['phonenumber']=contactinfo.phonenumber
-    if contactinfo.instagram_url != '':
-        stuff_for_frontend['instagram_url']=contactinfo.instagram_url
+    if ContactInfo.objects.filter(user = profile_id):
+        contactinfo = ContactInfo.objects.get(user = profile_id)
+        if contactinfo.email != '':
+            stuff_for_frontend['email']=contactinfo.email
+        if contactinfo.phonenumber != '':
+            stuff_for_frontend['phonenumber']=contactinfo.phonenumber
+        if contactinfo.instagram_url != '':
+            stuff_for_frontend['instagram_url']=contactinfo.instagram_url
     return render(request,'Arbonne/home.html',stuff_for_frontend)
 def skincare(request,profile_id):
     username = User.objects.get(id=profile_id).username

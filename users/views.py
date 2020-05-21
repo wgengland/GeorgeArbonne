@@ -34,7 +34,7 @@ def profile(request):
     if ContactInfo.objects.filter(user_id = request.user.id):
         stuff_for_frontend['contactinfopk']=ContactInfo.objects.filter(user_id=request.user.id)[0].pk
     else:
-        ContactInfo(user=self.request.user).save()
+        ContactInfo(user=request.user).save()
         stuff_for_frontend['contactinfopk']=ContactInfo.objects.filter(user_id=request.user.id)[0].pk
     return render(request, 'users/profile.html',stuff_for_frontend)
 

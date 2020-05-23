@@ -49,7 +49,6 @@ class ProductCreateView(LoginRequiredMixin,CreateView):
     initial = {'product_url': 'Paste from your Arbonne site'}
     template_name = 'users/create_product_form.html'
     fields = ['product_url']
-
     def form_valid(self,form):
         form.instance.author = self.request.user
         return super().form_valid(form)
@@ -58,7 +57,6 @@ class ProductUpdateView(LoginRequiredMixin,UpdateView):
     model = Product
     template_name = 'users/update_product_form.html'
     fields = ['product_url']
-
     def get_queryset(self):
         qs = super(ProductUpdateView, self).get_queryset()
         return qs.filter(author=self.request.user)

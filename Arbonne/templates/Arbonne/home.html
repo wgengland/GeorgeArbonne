@@ -84,8 +84,6 @@
 
 
                 </div>
-
-
                 <div id="reveal"class="card-reveal">
                    <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></span>
                    <p class="card-title">{{post.2}}</p>
@@ -95,10 +93,40 @@
             </div>
           {%endfor%}
         </div>
-        <br>
+      </div>
+      <hr>
+      <div class="container">
+        {%if BlogPosts%}
+        <h1 style="text-align:center;">Blog</h1>
+        <div class="BlogPosts" style="display:flex; justify-content:space-evenly;">
+          {% for blogpost in BlogPosts%}
+
+          <div class="post" style="width:45%;">
+            <div class="card">
+              <div class="card-action">
+                <span class="card-title activator blue-text text-ligthen-2"><i class="material-icons right" style="color:#ee6e73;">expand_more</i></span>
+                <a href={{blogpost.0}} target="_blank" style="font-size:1.5vw; color:#ee6e73;">
+                {{blogpost.0}}</a>
+              </div>
+              <div id="reveal"class="card-reveal">
+                 <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></span>
+                 <h5 style="font-size:1.5vw; color:#ee6e73;">{{blogpost.0}}</h5>
+                 <hr>
+                 <p class="card-title" style="  white-space: pre-line;">{{blogpost.1}}</p>
+               </div>
+              <div class="card-image" style="height:33vh;">
+                <img src={{blogpost.2}} style="height: 33vh;object-fit: cover;padding: 3px;">
+              </div>
+
+            </div>
+          </div>
+          {%endfor%}
+
+        </div>
+        {%endif%}
       </div>
     </main>
-
+<br>
     <footer class="page-footer">
       <div class="container">
         <div class="row">

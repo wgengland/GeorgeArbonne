@@ -136,3 +136,7 @@ flex-flow: wrap;
 .bottomtext a{
   align-self: flex-end;
 }
+.BlogPosts{
+  display: flex;
+  justify-content:space-evenly;
+}

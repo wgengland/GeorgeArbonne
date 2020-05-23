@@ -45,3 +45,13 @@ class Hit(models.Model):
     user = models.ForeignKey(User,null=True,on_delete=models.CASCADE)
     def __str__(self):
         return self.user.username + " hit at " + str(self.dateOfHit)
+
+class BlogPost(models.Model):
+    blog_post_title =  models.CharField(max_length = 500)
+    blog_post_content = models.TextField()
+    pub_date = models.DateTimeField(default = timezone.now)
+    image_url = models.TextField()
+    author = models.ForeignKey(User,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.blog_post_title

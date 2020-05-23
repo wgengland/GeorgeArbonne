@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.utils import timezone
 from datetime import timedelta
-from .models import Product, Analytics,Hit
+from .models import Product, Analytics,Hit,BlogPost
 from users.models import ContactInfo
 from django.contrib.auth.models import User
 from bs4 import BeautifulSoup
@@ -56,7 +56,20 @@ def my_favorites(request,profile_id):
             stuff_for_frontend['phonenumber']=contactinfo.phonenumber
         if contactinfo.instagram_url != '':
             stuff_for_frontend['instagram_url']=contactinfo.instagram_url
+    BlogPosts=[]
+    if BlogPost.objects.filter(author = profile_id):
+        for post in BlogPost.objects.filter(author = profile_id).order_by('-pub_date'):
+            title=post.blog_post_title
+            content=post.blog_post_content
+            url=post.image_url
+            BlogPosts.append((title,content,url))
+        stuff_for_frontend['BlogPosts']=BlogPosts
+
+
+
     return render(request,'Arbonne/home.html',stuff_for_frontend)
+
+
 def skincare(request,profile_id):
     username = User.objects.get(id=profile_id).username
     catalog_url = Arbonne_URL_1 + username + Arbonne_URL_2 + "480&viewall=true"

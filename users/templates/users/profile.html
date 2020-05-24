@@ -19,6 +19,7 @@
           justify-content: space-evenly;">
             <a style="margin:3px;flex: 1 1 0px;"class ="btn btn-primary btn-sm" href="{%url 'users:create_product'%}" role="button">Add a Product</a></p>
             <a style="margin:3px;flex:1 1 0px;"class ="btn btn-primary btn-sm" href="{%url 'users:update_contact_info' contactinfopk%}" role="button">Update Contact Info</a></p>
+            <a style="margin:3px;flex:1 1 0px;"class ="btn btn-primary btn-sm" href="{%url 'users:create_blog_post'%}" role="button">Create Blog Post</a></p>
 
           </div>
         </div>
@@ -117,12 +118,33 @@
   {%for post in postings_by_user%}
 
     <div class="card">
-      <img class="card-img-top" src={{post.image_url}} alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">{{post.product_name}}</h5>
+      <img class="card-img-top" style="width:50%;margin:5% 25% 0% 25%;"src={{post.image_url}} alt="Card image cap">
+      <div class="card-body" style="padding:.5rem;">
+        <h7 class="card-title">{{post.product_name}}</h7>
       </div>
       <div class="card-footer">
         <a href="{% url 'users:update_product' post.pk%}"><small class="text-muted">Update Product</small></a>
+      </div>
+    </div>
+  {%endfor%}
+  </div>
+</div>
+<div class="content-section" style="background-color: #FFFFF0;">
+  <h3 style="teac-align:center;">My Blog Posts</h3>
+  <hr>
+  <div class="card-deck" >
+  {%for post in BlogPosts%}
+
+    <div class="card">
+      <div class="card-body" style="padding:.5rem .5rem 0rem .5rem;">
+        <h5 class="card-title">{{post.blog_post_title}}</h5>
+      </div>
+      <img class="card-img-top" style="padding: 0% 5% 5% 5%;object-fit: cover;height: 33vh;"
+            src={{post.image_url}} alt="Card image cap">
+
+      <div class="card-footer">
+        <a style="color:blue; "href="{% url 'users:update_blog_post' post.pk%}"><small>Update Blog Post</small></a><br>
+        <a style="color:red;" href="{% url 'users:delete_blog_post' post.pk%}"><small>Delete Blog Post</small></a>
       </div>
     </div>
   {%endfor%}
